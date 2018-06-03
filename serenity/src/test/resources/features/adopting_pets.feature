@@ -1,11 +1,10 @@
-@adopting-pets
-Feature: Adopting pets from Puppy Adoption Agency 
+@adopt-pets 
+Feature: Adopt pets from Puppy Adoption Agency 
 	As a pet lover,
     I want to adopt one or more pet
-    So that they can choose my furniture.
+    So that they can chew my furniture.
   
-@Kiet_WIP
-Scenario: Adopting one pet successfully 
+Scenario: Adopt pets 
 	Given I am at Puppy Adoption Agency website "http://puppies.herokuapp.com" 
 	When I adopt these pets: 
 		| Brook   |

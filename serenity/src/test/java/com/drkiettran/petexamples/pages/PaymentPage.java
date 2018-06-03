@@ -5,8 +5,6 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import com.drkiettran.petexamples.model.PaymentInfo;
-
 import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.PageObject;
 
@@ -24,16 +22,16 @@ public class PaymentPage extends PageObject {
 	@FindBy(xpath = "//input[@value='Place Order']")
 	private WebElement placeOrderButton;
 
-	public void fillsOut(PaymentInfo payInfo) throws Exception {
-		orderNameTextField.sendKeys(payInfo.getName());
-		orderAddrTextField.sendKeys(payInfo.getAddress());
-		orderEmailTextField.sendKeys(payInfo.getEmail());
+	public void fillsOut(String name, String address, String email, String payType) throws Exception {
+		orderNameTextField.sendKeys(name);
+		orderAddrTextField.sendKeys(address);
+		orderEmailTextField.sendKeys(email);
 
-		String xpath = String.format("//option[@value='%s']", payInfo.getPayType());
+		String xpath = String.format("//option[@value='%s']", payType);
 		List<WebElement> options = getDriver().findElements(By.xpath(xpath));
 
 		if (options.size() != 1) {
-			throw new Exception("Invalid payment method " + payInfo.getPayType());
+			throw new Exception("Invalid payment method " + payType);
 		}
 
 		options.get(0).click();

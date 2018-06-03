@@ -1,6 +1,5 @@
 package com.drkiettran.petexamples.features.steps.serenity;
 
-import com.drkiettran.petexamples.model.PaymentInfo;
 import com.drkiettran.petexamples.pages.AdoptionPage;
 import com.drkiettran.petexamples.pages.PaymentPage;
 import com.drkiettran.petexamples.pages.PetDetailPage;
@@ -64,8 +63,8 @@ public class AdopterSteps {
 	}
 
 	@Step
-	public void enters_payment_info(PaymentInfo payInfo) throws Exception {
-		paymentPage.fillsOut(payInfo);
+	public void enters_payment_info(String name, String address, String email, String payType) throws Exception {
+		paymentPage.fillsOut(name, address, email, payType);
 	}
 
 	@Step

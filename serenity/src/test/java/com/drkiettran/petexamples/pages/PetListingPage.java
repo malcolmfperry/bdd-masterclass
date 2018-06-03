@@ -5,7 +5,6 @@ import java.util.stream.Collectors;
 
 import org.openqa.selenium.WebElement;
 
-import net.serenitybdd.core.annotations.findby.By;
 import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.PageObject;
 
@@ -33,6 +32,7 @@ public class PetListingPage extends PageObject {
 		for (int i = 0; i < nameElements.size(); i++) {
 			if (nameElements.get(i).getText().equalsIgnoreCase(selectedPet)) {
 				viewElements.get(i).click();
+				break;
 			}
 		}
 	}
