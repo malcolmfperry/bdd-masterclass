@@ -23,7 +23,7 @@ local.properties
 # External tool builders
 .externalToolBuilders/
 
-# Locally stored "Eclipse launch configurations"
+# Locally stored "Eclipse launch configurations"q
 *.launch
 
 # CDT-specific
