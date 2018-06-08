@@ -43,8 +43,6 @@ public class AdopterSteps {
 
 	@Step
 	public void quits_adopting() {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Step

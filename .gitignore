@@ -1,6 +1,11 @@
 .metadata
 .gradle
 .classpath
+~*.project
+.factorypath
+.sfdx/
+.vscode-janus-debug
+.vscode/
 .recommenders/
 *~
 bin/
