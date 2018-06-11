@@ -15,4 +15,6 @@ REM SET PATH=%JAVA_HOME%\bin;%CSD_BIN%;%PATH%;
 SET PUPPY_WEBSITE=http://puppies.herokuapp.com
 SET WEBDRIVER_CHROME_DRIVER=c:/csd-work/bin/misc/chromedriver-239.exe
 
-mvn -Dtest=AdoptPetPOMStyle test 
+call mvn clean
+call mvn -Dtest=AdoptPetsPOMStyle test 
+call mvn -Dtest=AdoptPetsPFStyle test

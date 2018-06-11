@@ -37,3 +37,19 @@ Linux. I ran these scripts from Windows 10 & Ubuntu 16.04.
 
 ## JVM
 The code in this repository requires Java 8.
+
+# Styles for Selenium Page Objects
+This project introduces two styles of dealing with web pages: 1) Page Object
+Model (POM) and Page Factory (PF). Page Factory is a built-in framework 
+by the Selenium framework.
+
+# Selenium Web Driver with Page Object Model (POM)
+This style is a simple programming practice where it requires basic knowledge
+and skillset for Selenium driver. It is focusing on organizing web pages 
+separate from the testing logic.
+
+# Selenium Web Driver with Page Factory (PF)
+By using Page Factory framework, you can leverage the `@FindBy` annotation; 
+thus, it make programming the Selenium driver code a bit easier to read
+and maintain.
+
