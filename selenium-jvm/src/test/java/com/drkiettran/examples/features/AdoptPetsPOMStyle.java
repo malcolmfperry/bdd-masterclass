@@ -4,8 +4,9 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
 import java.io.File;
-import java.util.logging.Logger;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -13,28 +14,24 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import com.drkiettran.examples.model.PaymentInfo;
-import com.drkiettran.examples.pom.AdoptionPage;
-import com.drkiettran.examples.pom.PaymentPage;
-import com.drkiettran.examples.pom.PetDetailPage;
-import com.drkiettran.examples.pom.PetListingPage;
-import com.drkiettran.examples.pom.PetShoppingCartPage;
+import com.drkiettran.examples.workflow.AdoptionStepsPOMStyle;
 
 @RunWith(JUnit4.class)
 public class AdoptPetsPOMStyle {
-	private static final Logger logger = Logger.getLogger(AdoptPetsPOMStyle.class.toString());
+	private static final Logger logger = LogManager.getLogger(AdoptPetsPOMStyle.class);
+
 	private static ChromeDriverService service;
-	private WebDriver driver;
-	private AdoptionPage adoptionPage;
-	private PetListingPage petListingPage;
-	private PetDetailPage petDetailPage;
-	private PetShoppingCartPage petShoppingCartPage;
-	private PaymentPage paymentPage;
+	private String petName2bAdopted;
+	private PaymentInfo paymentInfo;
+	private String expectedNote;
+
+	private AdoptionStepsPOMStyle adopter;
+	private RemoteWebDriver webDriver;
 
 	@BeforeClass
 	public static void createAndStartService() throws Exception {
@@ -46,6 +43,7 @@ public class AdoptPetsPOMStyle {
 				.build();
 		// @formatter:on
 		service.start();
+		logger.info("Chrome Driver Service completes!");
 	}
 
 	@AfterClass
@@ -55,63 +53,58 @@ public class AdoptPetsPOMStyle {
 
 	@Before
 	public void setUp() {
-		driver = new RemoteWebDriver(service.getUrl(), DesiredCapabilities.chrome());
-		adoptionPage = new AdoptionPage(driver);
-		petListingPage = new PetListingPage(driver);
-		petDetailPage = new PetDetailPage(driver);
-		petShoppingCartPage = new PetShoppingCartPage(driver);
-		paymentPage = new PaymentPage(driver);
+		webDriver = new RemoteWebDriver(service.getUrl(), DesiredCapabilities.chrome());
+		adopter = new AdoptionStepsPOMStyle(webDriver);
+		adopter.visits(websiteUrl());
+		loadsTestData();
+		logger.info("Set up completes!");
+	}
+
+	private void loadsTestData() {
+		petName2bAdopted = "Topsy";
+		paymentInfo = new PaymentInfo("Check", "John Doe", "123 Main Street, New York, NY 12345", "jdoe@email.com");
+		expectedNote = "Thank you for adopting a puppy!";
+		logger.info("Load data completes!");
+	}
+
+	private String websiteUrl() {
+		return System.getenv("PUPPY_WEBSITE");
 	}
 
 	@After
 	public void tearDown() {
-		driver.quit();
+		webDriver.quit();
 	}
 
 	@Test
-	public void shouldAdoptOnePet() throws Exception {
-		given_I_am_at_the_Puppy_Adoption_Agency();
-		when_I_adopt_a_pet_named("Topsy");
-		and_I_pay_for_it_using(
-				new PaymentInfo("Check", "John Doe", "123 Main Street, New York, NY 12345", "jdoe@email.com"));
-		then_I_should_see_this_thank_you_message("Thank you for adopting a puppy!");
+	public void adoptPets_withOneExistingPet_getsThankYouNote() throws Exception {
+		given_there_exists_a_pet_named(petName2bAdopted);
+		when_I_adopt_the_pet_named(petName2bAdopted);
+		and_I_pay_for_the_adoption_using(paymentInfo);
+		then_I_should_receive_this_note(expectedNote);
 	}
 
-	private void then_I_should_see_this_thank_you_message(String expectedNote) {
-		assertThat(adoptionPage.getNotes(), equalTo(expectedNote));
-		logger.info("Found the thank you note!");
+	private void then_I_should_receive_this_note(String expectedNote2) {
+		String actualNote = adopter.receivesNote();
+		assertThat(expectedNote, equalTo(actualNote));
+		logger.info("Received: " + actualNote);
 	}
 
-	private void and_I_pay_for_it_using(PaymentInfo payInfo) {
-		paymentPage.placesOrder(payInfo.getPayType(), payInfo.getPayer(), payInfo.getPayerAddress(),
-				payInfo.getPayerEmail());
-		logger.info("Paid for the adoption!");
+	private void and_I_pay_for_the_adoption_using(PaymentInfo thePayInfo) {
+		adopter.paysForTheAdoptionWith(thePayInfo);
+		logger.info("The adoption is paid for!");
 	}
 
-	private void when_I_adopt_a_pet_named(String petName) throws Exception {
-		for (;;) {
-			if (petListingPage.looksFor(petName).isFound()) {
-				logger.info("Found " + petName);
-				break;
-			}
-
-			if (petListingPage.looksForNextButton().isFound()) {
-				petListingPage.clicksNext();
-				logger.info("next page.");
-				continue;
-			}
-			throw new Exception("The pet is not found!");
-		}
-
-		petListingPage.viewsDetail(petName);
-		petDetailPage.adopts(petName);
-		petShoppingCartPage.complesAdoption(petName);
-		logger.info("Completed the adoption!");
+	private void when_I_adopt_the_pet_named(String thePet) {
+		adopter.viewsDetailsOf(thePet);
+		adopter.adopts(thePet);
+		adopter.completesTheAdoption();
+		logger.info(thePet + " is adopted!");
 	}
 
-	private void given_I_am_at_the_Puppy_Adoption_Agency() {
-		String websiteURL = System.getenv("PUPPY_WEBSITE");
-		adoptionPage.visit(websiteURL);
-		logger.info("Opened website!");
+	private void given_there_exists_a_pet_named(String thePet) throws Exception {
+		adopter.searchesPetByName(thePet);
+		logger.info(thePet + " is found!");
 	}
+
 }

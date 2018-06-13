@@ -12,7 +12,7 @@ public class PetShoppingCartPage {
 		this.driver = driver;
 	}
 
-	public void complesAdoption(String petName) {
+	public void complesAdoption() {
 		driver.findElement(byCompleteButton).click();
 	}
 
