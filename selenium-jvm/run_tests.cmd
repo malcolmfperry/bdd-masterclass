@@ -16,5 +16,5 @@ SET PUPPY_WEBSITE=http://puppies.herokuapp.com
 SET WEBDRIVER_CHROME_DRIVER=c:/csd-work/bin/misc/chromedriver-239.exe
 
 call mvn clean
-call mvn -Dtest=AdoptPetsPOMStyle test 
-call mvn -Dtest=AdoptPetsPFStyle test
+call mvn -Dtest=AdoptPetsPOMStyle -Dlog4j.configurationFile=src/test/resources/log4j2.xml test 
+call mvn -Dtest=AdoptPetsPFStyle -Dlog4j.configurationFile=src/test/resources/log4j2.xml test

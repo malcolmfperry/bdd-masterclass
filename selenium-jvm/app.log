@@ -31,3 +31,14 @@
 2018-06-12 19:40:10,986 INFO c.d.e.f.AdoptPetsPOMStyle [main] Topsy is adopted! 
 2018-06-12 19:40:11,641 INFO c.d.e.f.AdoptPetsPOMStyle [main] the adoption is paid for! 
 2018-06-12 19:40:11,683 INFO c.d.e.f.AdoptPetsPOMStyle [main] Received: Thank you for adopting a puppy! 
+2018-06-13 07:34:33,649 INFO c.d.e.f.AdoptPetsPOMStyle [main] Chrome Driver Service completes! 
+2018-06-13 07:34:37,529 INFO c.d.e.w.AdoptionStepsPOMStyle [main] Opened website! 
+2018-06-13 07:34:37,529 INFO c.d.e.f.AdoptPetsPOMStyle [main] Load data completes! 
+2018-06-13 07:34:37,529 INFO c.d.e.f.AdoptPetsPOMStyle [main] Set up completes! 
+2018-06-13 07:34:37,971 INFO c.d.e.w.AdoptionStepsPOMStyle [main] next page. 
+2018-06-13 07:34:38,063 INFO c.d.e.w.AdoptionStepsPOMStyle [main] Found Topsy 
+2018-06-13 07:34:38,063 INFO c.d.e.f.AdoptPetsPOMStyle [main] Topsy is found! 
+2018-06-13 07:34:38,146 INFO c.d.e.p.PetListingPage [main] View Topsy in details 
+2018-06-13 07:34:39,057 INFO c.d.e.f.AdoptPetsPOMStyle [main] Topsy is adopted! 
+2018-06-13 07:34:39,729 INFO c.d.e.f.AdoptPetsPOMStyle [main] The adoption is paid for! 
+2018-06-13 07:34:39,775 INFO c.d.e.f.AdoptPetsPOMStyle [main] Received: Thank you for adopting a puppy! 
