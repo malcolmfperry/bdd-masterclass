@@ -17,7 +17,7 @@ public class PetShoppingCartPage {
 		PageFactory.initElements(driver, this);
 	}
 
-	public void complesAdoption(String petName) {
+	public void complesAdoption() {
 		completeAdoptionButton.click();
 	}
 

@@ -21,7 +21,7 @@ public class AdoptionPage {
 		driver.get(websiteURL);
 	}
 
-	public String getNotes() {
+	public String getsNote() {
 		return note.getText();
 	}
 
