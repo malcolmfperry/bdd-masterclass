@@ -3,8 +3,6 @@ package com.drkiettran.examples.features;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
-import java.io.File;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.After;
@@ -15,12 +13,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 import org.openqa.selenium.chrome.ChromeDriverService;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
+import com.drkiettran.examples.automation.WebDriverHandler;
 import com.drkiettran.examples.model.PaymentInfo;
-import com.drkiettran.examples.webdriver.WebDriverHandler;
-import com.drkiettran.examples.workflow.AdoptionStepsPFStyle;
 import com.drkiettran.examples.workflow.AdoptionStepsPOMStyle;
 
 @RunWith(JUnit4.class)

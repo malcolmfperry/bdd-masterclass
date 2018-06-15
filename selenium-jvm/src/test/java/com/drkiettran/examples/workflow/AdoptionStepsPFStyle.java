@@ -2,15 +2,14 @@ package com.drkiettran.examples.workflow;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.remote.RemoteWebDriver;
 
+import com.drkiettran.examples.automation.WebDriverHandler;
 import com.drkiettran.examples.model.PaymentInfo;
 import com.drkiettran.examples.pf.AdoptionPage;
 import com.drkiettran.examples.pf.PaymentPage;
 import com.drkiettran.examples.pf.PetDetailPage;
 import com.drkiettran.examples.pf.PetListingPage;
 import com.drkiettran.examples.pf.PetShoppingCartPage;
-import com.drkiettran.examples.webdriver.WebDriverHandler;
 
 public class AdoptionStepsPFStyle {
 	private static final Logger logger = LogManager.getLogger(AdoptionStepsPFStyle.class);

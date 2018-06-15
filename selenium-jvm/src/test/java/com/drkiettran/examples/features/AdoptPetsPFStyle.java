@@ -12,12 +12,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
-import org.openqa.selenium.chrome.ChromeDriverService;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
 
+import com.drkiettran.examples.automation.WebDriverHandler;
 import com.drkiettran.examples.model.PaymentInfo;
-import com.drkiettran.examples.webdriver.WebDriverHandler;
 import com.drkiettran.examples.workflow.AdoptionStepsPFStyle;
 
 @RunWith(JUnit4.class)
