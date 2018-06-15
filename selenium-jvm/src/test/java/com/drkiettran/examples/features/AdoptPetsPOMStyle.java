@@ -19,6 +19,8 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import com.drkiettran.examples.model.PaymentInfo;
+import com.drkiettran.examples.webdriver.WebDriverHandler;
+import com.drkiettran.examples.workflow.AdoptionStepsPFStyle;
 import com.drkiettran.examples.workflow.AdoptionStepsPOMStyle;
 
 @RunWith(JUnit4.class)
@@ -35,26 +37,17 @@ public class AdoptPetsPOMStyle {
 
 	@BeforeClass
 	public static void createAndStartService() throws Exception {
-		String chromePath = System.getenv("WEBDRIVER_CHROME_DRIVER");
-		// @formatter:off
-		service = new ChromeDriverService.Builder()
-				.usingDriverExecutable(new File(chromePath))
-				.usingAnyFreePort()
-				.build();
-		// @formatter:on
-		service.start();
-		logger.info("Chrome Driver Service completes!");
+		WebDriverHandler.startChromeDriverService();
 	}
 
 	@AfterClass
 	public static void stopService() {
-		service.stop();
+		WebDriverHandler.stopChromeDriverService();
 	}
 
 	@Before
 	public void setUp() {
-		webDriver = new RemoteWebDriver(service.getUrl(), DesiredCapabilities.chrome());
-		adopter = new AdoptionStepsPOMStyle(webDriver);
+		adopter = new AdoptionStepsPOMStyle();
 		adopter.visits(websiteUrl());
 		loadsTestData();
 		logger.info("Set up completes!");
@@ -67,13 +60,13 @@ public class AdoptPetsPOMStyle {
 		logger.info("Load data completes!");
 	}
 
-	private String websiteUrl() {
-		return System.getenv("PUPPY_WEBSITE");
-	}
-
 	@After
 	public void tearDown() {
-		webDriver.quit();
+		WebDriverHandler.quit();
+	}
+
+	private String websiteUrl() {
+		return System.getenv("PUPPY_WEBSITE");
 	}
 
 	@Test

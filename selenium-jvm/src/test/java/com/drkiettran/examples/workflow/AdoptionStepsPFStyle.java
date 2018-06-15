@@ -10,23 +10,22 @@ import com.drkiettran.examples.pf.PaymentPage;
 import com.drkiettran.examples.pf.PetDetailPage;
 import com.drkiettran.examples.pf.PetListingPage;
 import com.drkiettran.examples.pf.PetShoppingCartPage;
+import com.drkiettran.examples.webdriver.WebDriverHandler;
 
 public class AdoptionStepsPFStyle {
 	private static final Logger logger = LogManager.getLogger(AdoptionStepsPFStyle.class);
-	private RemoteWebDriver driver;
 	private AdoptionPage adoptionPage;
 	private PetListingPage petListingPage;
 	private PetDetailPage petDetailPage;
 	private PetShoppingCartPage petShoppingCartPage;
 	private PaymentPage paymentPage;
 
-	public AdoptionStepsPFStyle(RemoteWebDriver driver) {
-		this.driver = driver;
-		adoptionPage = new AdoptionPage(this.driver);
-		petListingPage = new PetListingPage(this.driver);
-		petDetailPage = new PetDetailPage(this.driver);
-		petShoppingCartPage = new PetShoppingCartPage(this.driver);
-		paymentPage = new PaymentPage(this.driver);
+	public AdoptionStepsPFStyle() {
+		adoptionPage = new AdoptionPage(WebDriverHandler.getRemoteWebDriver());
+		petListingPage = new PetListingPage(WebDriverHandler.getRemoteWebDriver());
+		petDetailPage = new PetDetailPage(WebDriverHandler.getRemoteWebDriver());
+		petShoppingCartPage = new PetShoppingCartPage(WebDriverHandler.getRemoteWebDriver());
+		paymentPage = new PaymentPage(WebDriverHandler.getRemoteWebDriver());
 	}
 
 	public void given_I_am_at_the_Puppy_Adoption_Agency() {

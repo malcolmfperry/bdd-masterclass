@@ -13,7 +13,7 @@ public class PetDetailPage {
 
 	public PetDetailPage(WebDriver driver) {
 		this.driver = driver;
-		PageFactory.initElements(driver, this);
+		PageFactory.initElements(this.driver, this);
 	}
 
 	public void adopts(String petName) {
