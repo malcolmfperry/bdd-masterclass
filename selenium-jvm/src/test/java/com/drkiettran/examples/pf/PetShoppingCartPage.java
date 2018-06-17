@@ -14,10 +14,10 @@ public class PetShoppingCartPage {
 
 	public PetShoppingCartPage(WebDriver driver) {
 		this.driver = driver;
-		PageFactory.initElements(driver, this);
+		PageFactory.initElements(this.driver, this);
 	}
 
-	public void complesAdoption(String petName) {
+	public void complesAdoption() {
 		completeAdoptionButton.click();
 	}
 

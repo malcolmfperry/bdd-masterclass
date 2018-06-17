@@ -19,7 +19,6 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 @RunWith(JUnit4.class)
 public class BasicAuthTest {
 	private static final String AUTHENTICATED_TEXT = "Authenticated!";
-	private static final Object UNAUTHORIZED_TEXT = "Unauthorized";
 	private static ChromeDriverService service;
 	private WebDriver driver;
 

@@ -1,0 +1,11 @@
+C:\Users\ktran\eclipse-workspace\selenium-cs\bin\Debug\netcoreapp2.1\selenium-cs.deps.json
+C:\Users\ktran\eclipse-workspace\selenium-cs\bin\Debug\netcoreapp2.1\selenium-cs.runtimeconfig.json
+C:\Users\ktran\eclipse-workspace\selenium-cs\bin\Debug\netcoreapp2.1\selenium-cs.runtimeconfig.dev.json
+C:\Users\ktran\eclipse-workspace\selenium-cs\bin\Debug\netcoreapp2.1\selenium-cs.dll
+C:\Users\ktran\eclipse-workspace\selenium-cs\bin\Debug\netcoreapp2.1\selenium-cs.pdb
+C:\Users\ktran\eclipse-workspace\selenium-cs\obj\Debug\netcoreapp2.1\selenium-cs.csprojAssemblyReference.cache
+C:\Users\ktran\eclipse-workspace\selenium-cs\obj\Debug\netcoreapp2.1\selenium-cs.csproj.CoreCompileInputs.cache
+C:\Users\ktran\eclipse-workspace\selenium-cs\obj\Debug\netcoreapp2.1\selenium-cs.AssemblyInfoInputs.cache
+C:\Users\ktran\eclipse-workspace\selenium-cs\obj\Debug\netcoreapp2.1\selenium-cs.AssemblyInfo.cs
+C:\Users\ktran\eclipse-workspace\selenium-cs\obj\Debug\netcoreapp2.1\selenium-cs.dll
+C:\Users\ktran\eclipse-workspace\selenium-cs\obj\Debug\netcoreapp2.1\selenium-cs.pdb

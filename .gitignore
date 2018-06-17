@@ -13,6 +13,7 @@ tmp/
 target/
 Servers/
 *.tmp
+*.log
 *.bak
 *.swp
 *~.nib

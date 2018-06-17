@@ -2,8 +2,8 @@ package com.drkiettran.examples.workflow;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.remote.RemoteWebDriver;
 
+import com.drkiettran.examples.automation.WebDriverHandler;
 import com.drkiettran.examples.model.PaymentInfo;
 import com.drkiettran.examples.pom.AdoptionPage;
 import com.drkiettran.examples.pom.PaymentPage;
@@ -13,20 +13,18 @@ import com.drkiettran.examples.pom.PetShoppingCartPage;
 
 public class AdoptionStepsPOMStyle {
 	private static final Logger logger = LogManager.getLogger(AdoptionStepsPOMStyle.class);
-	private RemoteWebDriver driver;
 	private AdoptionPage adoptionPage;
 	private PetListingPage petListingPage;
 	private PetDetailPage petDetailPage;
 	private PetShoppingCartPage petShoppingCartPage;
 	private PaymentPage paymentPage;
 
-	public AdoptionStepsPOMStyle(RemoteWebDriver driver) {
-		this.driver = driver;
-		adoptionPage = new AdoptionPage(this.driver);
-		petListingPage = new PetListingPage(this.driver);
-		petDetailPage = new PetDetailPage(this.driver);
-		petShoppingCartPage = new PetShoppingCartPage(this.driver);
-		paymentPage = new PaymentPage(this.driver);
+	public AdoptionStepsPOMStyle() {
+		adoptionPage = new AdoptionPage(WebDriverHandler.getRemoteWebDriver());
+		petListingPage = new PetListingPage(WebDriverHandler.getRemoteWebDriver());
+		petDetailPage = new PetDetailPage(WebDriverHandler.getRemoteWebDriver());
+		petShoppingCartPage = new PetShoppingCartPage(WebDriverHandler.getRemoteWebDriver());
+		paymentPage = new PaymentPage(WebDriverHandler.getRemoteWebDriver());
 	}
 
 	public void given_I_am_at_the_Puppy_Adoption_Agency() {

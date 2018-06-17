@@ -3,8 +3,6 @@ package com.drkiettran.examples.features;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
-import java.io.File;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.After;
@@ -14,10 +12,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
-import org.openqa.selenium.chrome.ChromeDriverService;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
 
+import com.drkiettran.examples.automation.WebDriverHandler;
 import com.drkiettran.examples.model.PaymentInfo;
 import com.drkiettran.examples.workflow.AdoptionStepsPOMStyle;
 
@@ -25,36 +21,25 @@ import com.drkiettran.examples.workflow.AdoptionStepsPOMStyle;
 public class AdoptPetsPOMStyle {
 	private static final Logger logger = LogManager.getLogger(AdoptPetsPOMStyle.class);
 
-	private static ChromeDriverService service;
 	private String petName2bAdopted;
 	private PaymentInfo paymentInfo;
 	private String expectedNote;
 
 	private AdoptionStepsPOMStyle adopter;
-	private RemoteWebDriver webDriver;
 
 	@BeforeClass
 	public static void createAndStartService() throws Exception {
-		String chromePath = System.getenv("WEBDRIVER_CHROME_DRIVER");
-		// @formatter:off
-		service = new ChromeDriverService.Builder()
-				.usingDriverExecutable(new File(chromePath))
-				.usingAnyFreePort()
-				.build();
-		// @formatter:on
-		service.start();
-		logger.info("Chrome Driver Service completes!");
+		WebDriverHandler.startChromeDriverService();
 	}
 
 	@AfterClass
 	public static void stopService() {
-		service.stop();
+		WebDriverHandler.stopChromeDriverService();
 	}
 
 	@Before
 	public void setUp() {
-		webDriver = new RemoteWebDriver(service.getUrl(), DesiredCapabilities.chrome());
-		adopter = new AdoptionStepsPOMStyle(webDriver);
+		adopter = new AdoptionStepsPOMStyle();
 		adopter.visits(websiteUrl());
 		loadsTestData();
 		logger.info("Set up completes!");
@@ -67,13 +52,13 @@ public class AdoptPetsPOMStyle {
 		logger.info("Load data completes!");
 	}
 
-	private String websiteUrl() {
-		return System.getenv("PUPPY_WEBSITE");
-	}
-
 	@After
 	public void tearDown() {
-		webDriver.quit();
+		WebDriverHandler.quit();
+	}
+
+	private String websiteUrl() {
+		return System.getenv("PUPPY_WEBSITE");
 	}
 
 	@Test

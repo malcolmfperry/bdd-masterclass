@@ -29,7 +29,7 @@ public class PaymentPage {
 
 	public PaymentPage(WebDriver driver) {
 		this.driver = driver;
-		PageFactory.initElements(driver, this);
+		PageFactory.initElements(this.driver, this);
 	}
 
 	public void placesOrder(String payType, String payerName, String payerAddress, String payerEmail) {
