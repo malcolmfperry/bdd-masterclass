@@ -1,31 +1,26 @@
 package com.drkiettran.examples.cukes.features;
 
+import com.drkiettran.examples.automation.WebDriverHandler2;
+import com.drkiettran.examples.cukes.workflows.Adopter;
+
 import cucumber.api.PendingException;
-import cucumber.api.java.After;
-import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
-public class AdoptPetStepDefs {
-	@Before
-	public void setUp() {
+public class AdoptPetSteps {
+	
 
-	}
-
-	@After
-	public void tearDown() {
-
-	}
+	private Adopter adopter;
 
 	@Given("^the adoption agency has a pet named \"([^\"]*)\"$")
 	public void the_adoption_agency_has_a_pet_named(String arg1) throws Throwable {
-		// Write code here that turns the phrase above into concrete actions
-		throw new PendingException();
+		adopter .visitsAdoptionAgency();
+		
 	}
 
-	@When("^I adop the pet \"([^\"]*)\"$")
-	public void i_adop_the_pet(String arg1) throws Throwable {
+	@When("^I adopt the pet \"([^\"]*)\"$")
+	public void i_adopt_the_pet(String arg1) throws Throwable {
 		// Write code here that turns the phrase above into concrete actions
 		throw new PendingException();
 	}

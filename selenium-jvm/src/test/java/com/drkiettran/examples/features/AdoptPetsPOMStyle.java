@@ -12,8 +12,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
-import org.openqa.selenium.chrome.ChromeDriverService;
-import org.openqa.selenium.remote.RemoteWebDriver;
 
 import com.drkiettran.examples.automation.WebDriverHandler;
 import com.drkiettran.examples.model.PaymentInfo;
@@ -23,13 +21,11 @@ import com.drkiettran.examples.workflow.AdoptionStepsPOMStyle;
 public class AdoptPetsPOMStyle {
 	private static final Logger logger = LogManager.getLogger(AdoptPetsPOMStyle.class);
 
-	private static ChromeDriverService service;
 	private String petName2bAdopted;
 	private PaymentInfo paymentInfo;
 	private String expectedNote;
 
 	private AdoptionStepsPOMStyle adopter;
-	private RemoteWebDriver webDriver;
 
 	@BeforeClass
 	public static void createAndStartService() throws Exception {
