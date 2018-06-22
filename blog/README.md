@@ -171,3 +171,116 @@ To configure CI for your project, run the ci-cd sub-generator (`jhipster ci-cd`)
 [Protractor]: https://angular.github.io/protractor/
 [Leaflet]: http://leafletjs.com/
 [DefinitelyTyped]: http://definitelytyped.org/
+
+## Some additional changes (Kiet Tran)
+
+I've made some changes for the following deploying as a container in Openshift.
+
+* create and starts a mysql instance in the Openshift
+* rebuild the webpack
+* build the production
+* build a docker image
+* test run it
+* push it to the public hub
+* pull it down for openshift
+* deploy it as a new app in openshift
+* verify it works
+
+``` bash
+oc new-app -e MYSQL_USER=user -e MYSQL_PASSWORD=password -e MYSQL_ROOT_PASSWORD=password registry.access.redhat.com/openshift3/mysql-55-rhel7
+oc get all -o name | grep mysql
+oc expose service mysql-55-rhel7
+oc describe route mysql-55-rhel7 | grep -i endpoint
+```
+
+You can use hostname: `mysql-55-rhel7-myproject.127.0.0.1.nip.io` or ip address 
+`172.17.0.3`
+
+``` bash
+
+yarn install && yarn webpack:build
+./mvnw -Dmaven.test.skip=true -Pprod install
+sudo docker build -t exblog:latest .
+sudo docker run -it --env MYSQL_HOST_IP=172.17.0.3 --env MYSQL_ROOT_PASSWORD=password exblog:latest
+sudo docker ps | grep -i exblog (this command prints a container id, say 9ee8....)
+sudo docker inspect 9ee8 | grep -i ip (get ip address of the running container)
+
+```
+
+* You can visit the website @ http://ip:8080/exblog/#
+* Make sure the website work as expected.
+
+You must have an account with Docker Hub in order to push images into the repository.
+I have an account with docker hub (drtran).
+
+``` bash
+sudo docker tag exblog:latest drtran/exblog:latest
+sudo docker push drtran/exblog:latest
+```
+
+Assuming that you already have openshift runs in your local box:
+
+``` bash
+sudo oc cluster up
+```
+
+Then,
+
+``` bash
+oc login -u system:admin
+oc import-image drtran/exblog --from drtran/exblog --insecure --confirm=true --all=true
+oc adm policy add-scc-to-user anyuid -z default
+oc new-app -e MYSQL_HOST_IP=172.17.0.3 -e MYSQL_ROOT_PASSWORD=password exblog
+oc get all -o name | grep exblog
+oc logs -f pods/exblog-x-xxxxx (tail the logs from the pod)
+oc expose svc exblog
+oc describe route exblog | grep Host (this is your hostname)
+```
+
+Visit this website after obtaining the host name (it may be different in your case...)
+`http://exblog-myproject.127.0.0.1.nip.io/exblog/#/`
+
+Deploying a tomcat on the Openshift requires this command as you saw:
+
+``` bash
+oc adm policy add-scc-to-user anyuid -z default
+```
+
+You can try to build a docker container using Wildfly instead. Then, you do not need
+to add `anyuid` to the policy
+
+## Building Docker Container using openshift/wildfly-101-centos7 image
+
+Before you build it, you need to make sure this file, `jboss-deployment-structure.xml` is located in either WEB-INF folder. the content of this file should be:
+
+``` xml
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss-deployment-structure>
+    <deployment>
+        <exclude-subsystems>
+            <subsystem name="logging" />
+        </exclude-subsystems>
+    </deployment>
+</jboss-deployment-structure>
+```
+
+I noticed that this command did not generate production code. This causes trouble during the deployment in both tomcat and wildfly.
+
+``` bash
+./mvnw -Dmaven.test.skip=true -Pprod clean install
+```
+
+Instead, I ended up doing this:
+
+``` bash
+./mvnw -Dmaven.test.skip=true -Pprod clean
+./mvnw -Dmaven.test.skip=true -Pprod 
+./mvnw -Dmaven.test.skip=true -Pprod install
+```
+
+``` bash
+sudo docker build -f ./Dockerfile_Wildfly -t exblog4wf:latest .
+sudo docker run -it --env MYSQL_HOST_IP=172.17.0.3 --env MYSQL_ROOT_PASSWORD=password exblog4wf:latest
+```
+
+The server is up and running but the app fails. At this time, I do not know why the deployment to jboss wildfly is not working properly.

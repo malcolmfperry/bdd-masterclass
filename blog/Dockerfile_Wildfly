@@ -1,0 +1,5 @@
+FROM openshift/wildfly-101-centos7
+
+COPY target/blog-0.0.1-SNAPSHOT.war /wildfly/standalone/deployments/exblog4wf.war
+
+CMD ["/wildfly/bin/standalone.sh"]
