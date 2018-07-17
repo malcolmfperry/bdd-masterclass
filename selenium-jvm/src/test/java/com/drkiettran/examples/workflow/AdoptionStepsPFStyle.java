@@ -3,7 +3,7 @@ package com.drkiettran.examples.workflow;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.drkiettran.examples.automation.WebDriverHandler;
+import com.drkiettran.examples.automation.WebDriverHandler2;
 import com.drkiettran.examples.model.PaymentInfo;
 import com.drkiettran.examples.pf.AdoptionPage;
 import com.drkiettran.examples.pf.PaymentPage;
@@ -19,12 +19,12 @@ public class AdoptionStepsPFStyle {
 	private PetShoppingCartPage petShoppingCartPage;
 	private PaymentPage paymentPage;
 
-	public AdoptionStepsPFStyle() {
-		adoptionPage = new AdoptionPage(WebDriverHandler.getRemoteWebDriver());
-		petListingPage = new PetListingPage(WebDriverHandler.getRemoteWebDriver());
-		petDetailPage = new PetDetailPage(WebDriverHandler.getRemoteWebDriver());
-		petShoppingCartPage = new PetShoppingCartPage(WebDriverHandler.getRemoteWebDriver());
-		paymentPage = new PaymentPage(WebDriverHandler.getRemoteWebDriver());
+	public AdoptionStepsPFStyle(WebDriverHandler2 wdh) {
+		adoptionPage = new AdoptionPage(wdh.getRemoteWebDriver());
+		petListingPage = new PetListingPage(wdh.getRemoteWebDriver());
+		petDetailPage = new PetDetailPage(wdh.getRemoteWebDriver());
+		petShoppingCartPage = new PetShoppingCartPage(wdh.getRemoteWebDriver());
+		paymentPage = new PaymentPage(wdh.getRemoteWebDriver());
 	}
 
 	public void given_I_am_at_the_Puppy_Adoption_Agency() {

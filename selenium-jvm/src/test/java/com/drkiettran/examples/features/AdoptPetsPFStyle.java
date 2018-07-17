@@ -14,12 +14,14 @@ import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
 import com.drkiettran.examples.automation.WebDriverHandler;
+import com.drkiettran.examples.automation.WebDriverHandler2;
 import com.drkiettran.examples.model.PaymentInfo;
 import com.drkiettran.examples.workflow.AdoptionStepsPFStyle;
 
 @RunWith(JUnit4.class)
 public class AdoptPetsPFStyle {
 	private static final Logger logger = LogManager.getLogger(AdoptPetsPFStyle.class);
+	private static WebDriverHandler2 wdh;
 	private String expectedNote;
 	private PaymentInfo paymentInfo;
 	private String petName2bAdopted;
@@ -27,17 +29,17 @@ public class AdoptPetsPFStyle {
 
 	@BeforeClass
 	public static void createAndStartService() throws Exception {
-		WebDriverHandler.startChromeDriverService();
+		wdh = new WebDriverHandler2();
 	}
 
 	@AfterClass
 	public static void stopService() {
-		WebDriverHandler.stopChromeDriverService();
+		wdh.stopChromeDriverService();
 	}
 
 	@Before
 	public void setUp() {
-		adopter = new AdoptionStepsPFStyle();
+		adopter = new AdoptionStepsPFStyle(wdh);
 		adopter.visits(websiteUrl());
 		loadsTestData();
 		logger.info("Set up completes!");
@@ -52,7 +54,7 @@ public class AdoptPetsPFStyle {
 
 	@After
 	public void tearDown() {
-		WebDriverHandler.quit();
+		wdh.quit();
 
 	}
 
