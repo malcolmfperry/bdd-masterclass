@@ -13,7 +13,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
-import com.drkiettran.examples.automation.WebDriverHandler;
 import com.drkiettran.examples.automation.WebDriverHandler2;
 import com.drkiettran.examples.model.PaymentInfo;
 import com.drkiettran.examples.workflow.AdoptionStepsPFStyle;

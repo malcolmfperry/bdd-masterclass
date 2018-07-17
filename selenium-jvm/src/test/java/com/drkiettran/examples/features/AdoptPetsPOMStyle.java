@@ -13,13 +13,15 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
-import com.drkiettran.examples.automation.WebDriverHandler;
+import com.drkiettran.examples.automation.WebDriverHandler2;
 import com.drkiettran.examples.model.PaymentInfo;
 import com.drkiettran.examples.workflow.AdoptionStepsPOMStyle;
 
 @RunWith(JUnit4.class)
 public class AdoptPetsPOMStyle {
 	private static final Logger logger = LogManager.getLogger(AdoptPetsPOMStyle.class);
+
+	private static WebDriverHandler2 wdh;
 
 	private String petName2bAdopted;
 	private PaymentInfo paymentInfo;
@@ -29,17 +31,17 @@ public class AdoptPetsPOMStyle {
 
 	@BeforeClass
 	public static void createAndStartService() throws Exception {
-		WebDriverHandler.startChromeDriverService();
+		wdh = new WebDriverHandler2();
 	}
 
 	@AfterClass
 	public static void stopService() {
-		WebDriverHandler.stopChromeDriverService();
+		wdh.stopChromeDriverService();
 	}
 
 	@Before
 	public void setUp() {
-		adopter = new AdoptionStepsPOMStyle();
+		adopter = new AdoptionStepsPOMStyle(wdh);
 		adopter.visits(websiteUrl());
 		loadsTestData();
 		logger.info("Set up completes!");
@@ -54,7 +56,7 @@ public class AdoptPetsPOMStyle {
 
 	@After
 	public void tearDown() {
-		WebDriverHandler.quit();
+		wdh.quit();
 	}
 
 	private String websiteUrl() {
