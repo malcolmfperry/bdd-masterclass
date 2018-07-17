@@ -24,13 +24,6 @@ public class AdoptPetsStepDefinitions {
 
 	private String url;
 
-	@Given("^I am at Puppy Adoption Agency website \"([^\"]*)\"$")
-	public void i_am_at_Puppy_Adoption_Agency_website(String url) throws Exception {
-		logger.info("***: open web browser with", url);
-		this.url = url;
-		adopter.goes_to_url(url);
-	}
-
 	@When("^I adopt these pets:$")
 	public void i_adopt_these_pets(List<String> pets) throws Exception {
 		for (String pet : pets) {
@@ -69,17 +62,26 @@ public class AdoptPetsStepDefinitions {
 		adopter.completes_the_adoption();
 		PaymentInfo payInfo = payInfoList.get(0);
 		// @formatter:off
-		adopter.enters_payment_info(payInfo.getName(),
-									payInfo.getAddress(),
-									payInfo.getEmail(),
-									payInfo.getPayType());
+		adopter.enters_payment_info(payInfo.getName(), payInfo.getAddress(), payInfo.getEmail(), payInfo.getPayType());
 		// @formatter:on
 		adopter.places_order();
 	}
 
-	@Then("^I should see a message \"([^\"]*)\"$")
-	public void i_should_see_a_message(String expectedThankyouNote) throws Exception {
+	@Given("^I am at a Pet Adoption Agency to adopt some pets$")
+	public void i_am_at_a_Pet_Adoption_Agency_to_adopt_some_pets() throws Exception {
+		this.url = getWebsiteUrl();
+		logger.info("***: open web browser with", url);
+		adopter.goes_to_url(url);
+	}
+
+	private String getWebsiteUrl() {
+		return System.getenv("PUPPY_WEBSITE");
+	}
+
+	@Then("^I should be thanked with a message \"([^\"]*)\"$")
+	public void i_should_be_thanked_with_a_message(String expectedThankyouNote) throws Exception {
 		String actualThankyouNote = adopter.searches_thank_you_note();
 		assertThat(actualThankyouNote, is(expectedThankyouNote));
 	}
+
 }
