@@ -1,6 +1,6 @@
 package com.drkiettran.examples.cukes.features;
 
-import com.drkiettran.examples.automation.WebDriverHandler2;
+import com.drkiettran.examples.automation.WebDriverHandler;
 import com.drkiettran.examples.cukes.workflows.Adopter;
 
 import cucumber.api.PendingException;

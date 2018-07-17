@@ -3,7 +3,7 @@ package com.drkiettran.examples.workflow;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.drkiettran.examples.automation.WebDriverHandler2;
+import com.drkiettran.examples.automation.WebDriverHandler;
 import com.drkiettran.examples.model.PaymentInfo;
 import com.drkiettran.examples.pom.AdoptionPage;
 import com.drkiettran.examples.pom.PaymentPage;
@@ -19,7 +19,7 @@ public class AdoptionStepsPOMStyle {
 	private PetShoppingCartPage petShoppingCartPage;
 	private PaymentPage paymentPage;
 
-	public AdoptionStepsPOMStyle(WebDriverHandler2 wdh) {
+	public AdoptionStepsPOMStyle(WebDriverHandler wdh) {
 		adoptionPage = new AdoptionPage(wdh.getRemoteWebDriver());
 		petListingPage = new PetListingPage(wdh.getRemoteWebDriver());
 		petDetailPage = new PetDetailPage(wdh.getRemoteWebDriver());

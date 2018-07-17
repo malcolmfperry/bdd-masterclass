@@ -8,12 +8,12 @@ import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
-public class WebDriverHandler2 {
+public class WebDriverHandler {
 	private ChromeDriverService service;
 	private RemoteWebDriver webDriver;
 	private String webSiteURL;
 
-	public WebDriverHandler2() throws IOException {
+	public WebDriverHandler() throws IOException {
 		String chromePath = System.getenv("WEBDRIVER_CHROME_DRIVER");
 		// @formatter:off
 		service = new ChromeDriverService.Builder()

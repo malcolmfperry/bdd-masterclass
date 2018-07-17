@@ -13,7 +13,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
-import com.drkiettran.examples.automation.WebDriverHandler2;
+import com.drkiettran.examples.automation.WebDriverHandler;
 import com.drkiettran.examples.model.PaymentInfo;
 import com.drkiettran.examples.workflow.AdoptionStepsPOMStyle;
 
@@ -21,7 +21,7 @@ import com.drkiettran.examples.workflow.AdoptionStepsPOMStyle;
 public class AdoptPetsPOMStyle {
 	private static final Logger logger = LogManager.getLogger(AdoptPetsPOMStyle.class);
 
-	private static WebDriverHandler2 wdh;
+	private static WebDriverHandler wdh;
 
 	private String petName2bAdopted;
 	private PaymentInfo paymentInfo;
@@ -31,7 +31,7 @@ public class AdoptPetsPOMStyle {
 
 	@BeforeClass
 	public static void createAndStartService() throws Exception {
-		wdh = new WebDriverHandler2();
+		wdh = new WebDriverHandler();
 	}
 
 	@AfterClass
