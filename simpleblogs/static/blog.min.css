@@ -1,0 +1,147 @@
+body {
+	font-size: 1.2em;
+	font-family: monospace;
+	background-color: #eee;
+	display: flex;
+	flex-wrap: wrap;
+	max-width: 950px;
+	margin: auto
+}
+
+header {
+	border-bottom: 2px solid #000;
+	display: flex;
+	width: 100%
+}
+
+article header {
+	border-bottom: 0;
+	display: block
+}
+
+article header h1 {
+	margin-bottom: 0;
+	clear: left
+}
+
+article header p {
+	font-style: italic
+}
+
+article li {
+	margin-top: 1em
+}
+
+a {
+	background: blue;
+	color: #fff;
+	text-decoration: none;
+	padding: 1px
+}
+
+a:hover {
+	background: red
+}
+
+code {
+	background: #000;
+	color: #adff2f;
+	padding: 2px 5px;
+	display: inline-block
+}
+
+main {
+	min-width: 310px;
+	width: 64%
+}
+
+article {
+	border-bottom: 1px solid grey
+}
+
+aside {
+	padding: 1em 0;
+	width: 33%;
+	margin-left: 3%;
+	font-size: .8em
+}
+
+aside h2 {
+	display: none
+}
+
+h1 {
+	text-decoration: underline;
+	font-size: 1.5em
+}
+
+h1, h2, h3, h4, h5 {
+	background: #fff;
+	text-decoration: none;
+	padding: .1em;
+	font-family: sans-serif;
+	clear: left
+}
+
+h2 {
+	font-size: 1.4em
+}
+
+h3 {
+	font-size: 1.2em
+}
+
+ul, li {
+	padding: 0 0 0 1.5em
+}
+
+li {
+	list-style: square
+}
+
+aside li {
+	padding-bottom: .5em
+}
+
+@media screen and (max-width:480px) , screen and (max-width:740px) {
+	body, main, aside {
+		font-size: 1em;
+		padding: 0 .2em
+	}
+	main, aside {
+		width: 100%
+	}
+	.gist {
+		width: 95%
+	}
+	header {
+		border-bottom: 0
+	}
+	aside {
+		margin: 0
+	}
+	aside ol {
+		padding: 0
+	}
+	aside li {
+		list-style: none
+	}
+	article {
+		padding-bottom: 1em;
+		background: #fff
+	}
+}
+
+blockquote {
+	display: block;
+	padding: .1em 2em .1em 1em;
+	margin: 0 0 10px;
+	position: relative;
+	font-style: italic;
+	color: #666;
+	text-align: justify
+}
+
+img {
+	display: inline-block;
+}
