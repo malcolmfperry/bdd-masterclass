@@ -1,7 +1,8 @@
 body {
-	font-size: 1.2em;
-	font-family: monospace;
-	background-color: #eee;
+	font: 1.1em/1.4 Cambria, Georgia Pro, Georgia, serif;
+	font-variant-numeric: lining-nums;
+	color: #111;
+	background: hsl(30, 90%, 98%);
 	display: flex;
 	flex-wrap: wrap;
 	max-width: 950px;
@@ -14,14 +15,23 @@ header {
 	width: 100%
 }
 
+footer {
+	font-style: normal;
+	font-size: small;
+	color: gray
+}
+
 article header {
 	border-bottom: 0;
 	display: block
 }
 
 article header h1 {
+	/*
 	margin-bottom: 0;
 	clear: left
+	*/
+	font-size: calc(1.48vw + 22px)
 }
 
 article header p {
