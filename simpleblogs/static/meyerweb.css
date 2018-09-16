@@ -1,0 +1,1049 @@
+/*
+html::before {content: "THIS SITE IS UNDER CONSTRUCTION";
+	display: block; text-align: center; font: bold 2em Impact, Stencil, sans-serif;
+	padding: 1ch 1em;
+	color: #FC0;
+	background:
+		linear-gradient(to top, #000, #000),
+		repeating-linear-gradient(45deg, #FC0, #FC0 0.5ch, 0.5ch, black 1ch),
+		#000;
+	background-clip: content-box, border-box, border-box;}
+body::before {content: "(seriously, Iâ€™m redesigning it live RIGHT NOW!)";
+	display: block; text-align: center; font: 1em Open Sans, sans-serif;
+	color: #000; background: #FC08;
+	padding: 1ch;
+	}
+
+ ============================== cut here ==================================== */
+
+/* --------------------------------------------------------------------------------- 
+   Generic styles
+   --------------------------------------------------------------------------------- */
+* {
+	box-sizing: border-box;
+}
+
+body {
+	font: 1.1em/1.4 Cambria, Georgia Pro, Georgia, serif;
+	font-variant-numeric: lining-nums;
+	color: #111;
+	background: hsl(30, 90%, 98%);
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+}
+
+@media ( max-width : 65ch) {
+	body {
+		font-size: 1em;
+		line-height: 1.5;
+	}
+}
+
+#main {
+	width: 80ch;
+	max-width: 100%;
+	margin: 0 auto;
+	padding: 0 1em;
+}
+
+body.sidebar #main {
+	display: grid;
+	width: 120ch;
+	padding: 0;
+}
+
+body.sidebar.right #main {
+	grid-template-columns: minmax(1em, 1fr) minmax(25ch, 80ch)
+		minmax(25ch, 3fr);
+	grid-template-areas: ". main extra";
+}
+
+body.sidebar.left #main {
+	grid-template-columns: minmax(25ch, 3fr) minmax(25ch, 80ch)
+		minmax(1em, 1fr);
+	grid-template-areas: "extra main .";
+}
+
+body.sidebar #main #mainpage {
+	grid-area: main;
+}
+
+body.sidebar #main #extra {
+	grid-area: extra;
+	margin: 1.5em;
+	opacity: 0.6;
+}
+
+body.sidebar #main #extra ul {
+	margin: 0;
+	padding: 0 0.5em 0 1em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	margin: 1.5em 0 0.5em;
+}
+
+h1 {
+	font-size: 2.33em;
+}
+
+h2 {
+	font-size: 1.75em;
+}
+
+h3 {
+	font-size: 1.5em;
+}
+
+h4 {
+	font-size: 1.25em;
+}
+
+h5 {
+	font-size: 1.15em;
+}
+
+h6 {
+	font-size: 1.05em;
+}
+
+hr {
+	margin: 2em 0;
+}
+
+@
+supports (display: flex ) {hr .fallback {
+	display: none;
+}
+
+}
+a[href] {
+	color: #009;
+}
+
+a[href]:visited {
+	color: #639;
+}
+
+img
+
+
+:not
+
+ 
+
+(
+[
+height
+]
+
+ 
+
+)
+{
+max-width
+
+
+:
+
+ 
+
+100%;
+}
+blockquote {
+	font-style: italic;
+	font-size: 105%;
+}
+
+blockquote[cite]::after {
+	content: "(" attr(cite) ")";
+	display: block;
+	font-size: smaller;
+	font-style: normal;
+	opacity: 0.5;
+}
+
+form[id] blockquote[cite]::after {
+	display: none;
+}
+
+acronym, abbr {
+	text-decoration: none;
+}
+
+ins[title] {
+	text-decoration: none;
+	background: hsla(60, 100%, 50%, 0.1);
+}
+
+ins[title]::before {
+	content: "[" attr(title) "]";
+	margin-right: 1ch;
+	font-style: italic;
+	font-size: smaller;
+}
+
+del {
+	opacity: 0.42;
+}
+
+del[title]::before {
+	content: "[" attr(title) "]";
+	margin-right: 1ch;
+	font-style: italic;
+}
+
+pre, code, kbd, tt {
+	font: 95%/1 Consolas, Andale Mono, Courier New, monospace, sans-serif;
+}
+
+kbd, tt, acronym, abbr {
+	border-bottom: 1px dotted currentColor;
+	margin: 0 0.25ch;
+}
+
+kbd {
+	color: #080;
+}
+
+tt {
+	color: #777;
+}
+
+pre, code {
+	color: #800;
+}
+
+pre {
+	padding: 1em;
+	margin: 1.5em 0.25ch;
+	background: linear-gradient(to right, hsla(0, 50%, 70%, 0.1), 67%,
+		hsla(0, 50%, 60%, 0.075));
+	white-space: pre-wrap;
+}
+
+pre+pre {
+	margin-top: -1em;
+}
+
+pre[class] {
+	display: grid;
+	grid-template-columns: min-content 1fr;
+	padding: 0 1em 0 0;
+}
+
+pre[class]::before {
+	grid-column: 1;
+	margin-right: 1em;
+	padding: 0.125ch;
+	padding-left: 0.05ch;
+	transform: rotate(180deg);
+	content: attr(class);
+	writing-mode: vertical-lr;
+	text-align: center;
+	text-transform: uppercase;
+	font: bold 90% Open Sans, sans-serif;
+	background: hsla(0, 50%, 50%, 0.1);
+	color: hsla(0, 50%, 25%, 0.5);
+}
+
+pre code {
+	margin: 1em 0;
+	line-height: 1.2;
+}
+
+@media ( max-width : 40ch) {
+	pre[class] {
+		display: block;
+		margin-right: -1em;
+		margin-left: -0.75em;
+		padding: 0;
+	}
+	pre[class]::before {
+		display: block;
+		writing-mode: horizontal-tb;
+		transform: none;
+		margin: 0;
+	}
+	pre[class] code {
+		display: block;
+		padding: 0.5em;
+		margin: 0;
+	}
+}
+
+#www-meyerweb-com p.note {
+	font-style: italic;
+	text-indent: 0;
+}
+
+#www-meyerweb-com p.republished {
+	font-style: italic;
+	margin: 2em 0 -2em;
+	text-align: center;
+}
+
+#www-meyerweb-com p.update {
+	margin-top: 1em;
+	margin-bottom: 1em;
+	padding: 0 1em;
+	border: 1px solid rgba(0, 0, 0, 0.25);
+	border-width: 0 0.5em;
+	text-indent: 0;
+}
+
+figure, img.pic {
+	float: right;
+	max-width: 33%;
+}
+
+figure.opposite {
+	float: left;
+	margin: 0.5em 1.5em 0.75em 0;
+}
+
+figure figcaption {
+	font-size: 95%;
+	font-style: italic;
+	text-align: center;
+}
+
+.standalone {
+	float: none;
+	max-width: 100%;
+	margin: 1.5em 0;
+}
+
+.standalone, .standalone img:only-of-type {
+	display: block;
+	margin: 1.5em auto;
+}
+
+.standalone img:only-of-type {
+	margin: 0 auto;
+}
+
+img.tilt {
+	transform: rotate(2.3deg);
+}
+
+img.framed {
+	border: 3px double rgba(0, 0, 0, 0.5);
+}
+
+.book.cover {
+	filter: drop-shadow(-1px 2px 0 rgba(0, 0, 0, 0.33))
+		drop-shadow(0.25em 0.25em 0.125em rgba(0, 0, 0, 0.33))
+		drop-shadow(0.5em 0.5em 0.33em rgba(0, 0, 0, 0.5));
+	border: 1px solid rgba(0, 0, 0, 0.125);
+	border-width: 1px 0px 0 0.5px;
+	border-radius: 2.5px;
+	margin-bottom: 2ch;
+}
+
+dl dt {
+	font-weight: bold;
+	margin-top: 0.5em;
+}
+
+@
+supports (display: grid ) {dl .compact {
+	display: grid;
+	grid-template-columns: fit-content(20%) 1fr;
+	clear: right;
+}
+
+dl.compact dt {
+	grid-column: 1;
+	margin-top: 0;
+	text-align: right;
+}
+
+dl.compact dd {
+	grid-column: 2;
+	margin: 0 0.5em 0.75em;
+	padding-left: 0.5em;
+}
+
+dl.compact.separated dd {
+	border-left: 1px solid gray;
+}
+
+}
+.prev-next {
+	display: flex;
+	justify-content: space-between;
+	list-style: none;
+	margin: 2em 0;
+	padding: 0;
+}
+
+.prev-next>* {
+	flex: 0 1 50%;
+	text-align: center;
+}
+
+.prev-next>.prev {
+	text-align: right;
+}
+
+.prev-next>.main {
+	flex: 0 0 10%;
+}
+
+.prev-next>.next {
+	text-align: left;
+}
+
+table.data {
+	margin: 1.5em 0;
+	border-collapse: separate;
+	border-spacing: 1px;
+}
+
+table.data caption {
+	font-style: italic;
+}
+
+table.data :not(caption) {
+	font: 1em Source Sans Pro, Open Sans, Helvetica, sans-serif;
+}
+
+table.data th {
+	padding: 0.5ch 1ch 0.25ch;
+	font-weight: 550;
+}
+
+table.data td {
+	padding: 0.25ch 1ch 0.15ch;
+}
+
+table.data thead th {
+	background: hsla(30, 50%, 50%, 0.5);
+}
+
+table.data tbody tr:nth-child(odd)>* {
+	background: hsla(30, 50%, 50%, 0.13);
+}
+
+table.data tbody tr:nth-child(even)>* {
+	background: hsla(30, 50%, 50%, 0.25);
+}
+
+table.data :not(thead)+tbody tr:first-child>* {
+	border-top: 2px solid hsla(30, 50%, 50%, 0.5);
+}
+
+table.data tbody tr:last-child>* {
+	border-bottom: 2px solid hsla(30, 50%, 50%, 0.5);
+}
+
+table.chart {
+	margin: 1.5em 0;
+	border-collapse: separate;
+	border-spacing: 0;
+}
+
+table.chart th, table.chart td {
+	text-align: left;
+	vertical-align: top;
+	padding: 0.75em 0.5em;
+}
+
+table.chart tbody tr td {
+	border-top: 1px solid rgba(0, 0, 0, 0.25);
+}
+
+table.chart td>:only-child {
+	margin: 0;
+}
+
+/* --------------------------------------------------------------------------------- 
+   Structural styles
+   --------------------------------------------------------------------------------- */
+
+/* Masthead */
+
+/* image referenced in '#sitemast' rule Copyright Eric A. Meyer */
+#sitemast {
+	background: url(/ui-old/themes/130823-withlove.jpg) center/cover
+		no-repeat;
+	font-family: Source Sans Pro, Open Sans, Helvetica, sans-serif;
+	position: relative;
+}
+
+#sitemast h1 {
+	font-size: 1em;
+	margin: 0;
+}
+
+#sitemast h1 a, #sitemast>a {
+	color: hsl(30, 90%, 98%);
+	text-shadow: 0 0 3px #000, 0 0 2px #000;
+	display: flex;
+	justify-content: flex-end;
+	align-items: flex-end;
+	height: 20vh;
+	min-height: 2em;
+	padding: 0 0.5ch 0 0;
+	margin: 0;
+	font-size: calc(1.5em + 3vh);
+	text-decoration: none;
+}
+
+#sitemast #skiplinks {
+	position: absolute;
+	bottom: 1.5vh;
+	left: -51em;
+	width: 10em;
+}
+
+#sitemast #skiplinks a {
+	display: block;
+	background: black;
+	color: white;
+	margin: 3px;
+	padding: 0.25em;
+	transition: 150ms;
+}
+
+#sitemast #skiplinks a:focus {
+	background: #060;
+}
+
+#sitemast #skiplinks a:focus, #sitemast #skiplinks a:focus ~ a {
+	transform: translate(52em);
+}
+
+#sitemast #skiplinks:focus-within a {
+	transform: translate(52em);
+}
+
+@media ( max-height : 42em) {
+	#sitemast #skiplinks {
+		width: auto;
+	}
+	#sitemast #skiplinks a {
+		display: inline-block;
+	}
+}
+
+/* Navlinks */
+#navigate {
+	background: linear-gradient(to right, rgba(0, 0, 0, 0.1),
+		rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.1)) 50% 95%/90ch 1px no-repeat;
+}
+
+#navigate h4 {
+	display: none;
+}
+
+#navigate #navlinks {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	font: 1.15em Source Sans Pro, Open Sans, Helvetica, sans-serif;
+}
+
+#navigate #navlinks li {
+	flex: 0 0 auto;
+	text-align: center;
+	margin-bottom: 1px;
+}
+
+#navigate #navlinks a {
+	display: block;
+	text-decoration: none;
+	padding: 0.5em 1.25em 0.6em;
+	color: hsl(30, 75%, 25%);
+}
+
+#navigate #navlinks li:hover {
+	background: linear-gradient(0deg, hsla(240, 100%, 30%, 0.67) 0.75ch,
+		hsla(240, 100%, 30%, 0.25) 0.75ch, hsla(240, 100%, 30%, 0.1));
+}
+
+#navigate #navlinks li:hover a {
+	text-shadow: 0 0 1px hsl(30, 90%, 98%), 0 0 2px hsl(30, 90%, 98%), 0 0
+		2px hsl(30, 90%, 98%);
+}
+
+@media ( max-width : 90ch) {
+	#navigate #navlinks a {
+		padding: 0.25em 0.5em 0.33em;
+	}
+}
+
+@media ( max-width : 40ch) {
+	#navigate #navlinks a {
+		padding: 0.1em 0.25em 0.2em;
+	}
+	#navigate #navlinks li ~ li a::before {
+		content: "â€¢";
+		margin-right: 0.5em;
+	}
+}
+
+body.arch #navigate #navlinks #archLink, body.css #navigate #navlinks #cssLink,
+	body.tools #navigate #navlinks #toolsLink, body.write #navigate #navlinks #writeLink,
+	body.speak #navigate #navlinks #speakLink, body.other #navigate #navlinks #otherLink,
+	body.feeds #navigate #navlinks #feedsLink, body.about #navigate #navlinks #aboutsite
+	{
+	font-weight: bold;
+	border: solid hsla(30, 90%, 98%, 0.5);
+	border-width: 0 1px;
+	background: linear-gradient(0deg, hsl(240, 100%, 30%) 0.75ch,
+		transparent 0.75ch);
+}
+
+/* Footer */
+footer {
+	display: grid;
+	grid-template-areas: "arch proj eotd advi" "arch proj tour advi"
+		"sosu sosu sosu sosu" "cred cred cred cred";
+	grid-gap: 0 1.5em;
+	border-top: 1px solid hsla(30, 70%, 25%, 0.5);
+	background: linear-gradient(to bottom, hsl(30, 70%, 90%), transparent);
+	margin: 4em 0 0;
+	padding: 1.5em 10vw 2em;
+	font: 90% Source Sans Pro, Open Sans, Helvetica, sans-serif;
+}
+
+footer h4 {
+	font-size: 1em;
+	margin: 0 0 0.25em;
+}
+
+footer ul {
+	margin: 0 0 1em;
+	padding: 0;
+	list-style: none;
+}
+
+footer p {
+	margin: 0;
+}
+
+footer #archipelago {
+	grid-area: arch;
+}
+
+footer #projects {
+	grid-area: proj;
+}
+
+footer #excuse {
+	grid-area: eotd;
+	margin-bottom: 1em;
+}
+
+footer #excuse a {
+	text-transform: capitalize;
+}
+
+footer #tour {
+	grid-area: tour;
+}
+
+footer #advisory {
+	grid-area: advi;
+}
+
+footer #advisory img {
+	min-width: 100px;
+}
+
+footer p.sosumi {
+	grid-area: sosu;
+	margin-top: 1.5em;
+	text-align: center;
+	font-style: italic;
+}
+
+footer p#wp-credit {
+	grid-area: cred;
+	text-align: center;
+	font-style: italic;
+}
+
+@media ( max-width : 90ch) {
+	footer {
+		grid-template-areas: "arch proj" "eotd advi" "tour advi" "sosu sosu"
+			"cred cred";
+	}
+}
+
+/* --------------------------------------------------------------------------------- 
+   â€œThoughts From Ericâ€ styles
+   --------------------------------------------------------------------------------- */
+#thoughts {
+	margin-top: 3em;
+}
+
+@media ( max-width : 90ch) {
+	#thoughts {
+		margin-top: 1.5em;
+	}
+}
+
+#thoughts .entry {
+	padding-bottom: 3em;
+	margin-bottom: 5em;
+}
+
+#thoughts .entry header {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) minmax(min-content, max-content)
+		minmax(0, 1fr);
+	margin-bottom: 1.5em;
+}
+
+#thoughts .entry header>* {
+	grid-column: 2;
+}
+
+#thoughts .entry header .title {
+	font: 300%/1.05 Source Sans Pro, Open Sans, sans-serif;
+	letter-spacing: -0.05ch;
+	margin: 0 0 0.1ch;
+}
+
+#thoughts .entry header .title a {
+	text-decoration: none;
+}
+
+#thoughts .entry header:hover .title a::before {
+	content: "Â¶";
+	display: inline-block;
+	text-indent: 0;
+	width: 1.5ch;
+}
+
+#thoughts .entry header:hover .title {
+	text-indent: -1.5ch;
+}
+
+#thoughts .entry header .pubtime {
+	font-size: 105%;
+	text-align: right;
+	margin-right: 0.75ch;
+}
+
+@media ( max-width : 90ch) {
+	#thoughts .entry header {
+		display: block;
+	}
+	#thoughts .entry header .title {
+		font-size: 2em;
+		font-size: calc(1em + 5vmin);
+	}
+	#thoughts .entry header .pubtime {
+		font-size: 95%;
+	}
+}
+
+.entry p {
+	margin: 0.15em 0;
+}
+
+.entry p+p, .entry figure:not (.standalone ) +p, .entry img:not (.standalone
+	 ) +p, .entry p:not (.standalone ) +p, .entry table+p, .entry figure:not
+	 ([class] ) +p {
+	text-indent: 2em;
+}
+
+.entry blockquote, .entry ol, .entry ul {
+	margin-left: 1em;
+	padding-left: 2em;
+	margin-right: 0;
+	padding-right: 0.5em;
+}
+
+.entry p.note {
+	margin-top: 2em;
+}
+
+.entry .standalone img {
+	border: 3px double rgba(0, 0, 0, 0.25);
+}
+
+@media ( max-width : 90ch) {
+	.entry p+p, .entry figure:not (.standalone ) +p, .entry img:not (.standalone
+		 ) +p, .entry p:not (.standalone ) +p, .entry table+p, .entry figure:not
+		 ([class] ) +p {
+		text-indent: 1.5em;
+	}
+	.entry blockquote {
+		margin-left: 0;
+		padding-left: 1.5em;
+	}
+	.entry ol, .entry ul {
+		margin-left: 1.5em;
+		padding-left: 1em;
+	}
+}
+
+#thoughts .entry ul.meta {
+	margin: 3em 0 0;
+	padding: 1em 0 0;
+	list-style: none;
+	text-align: center;
+	font-style: italic;
+	background: linear-gradient(to right, rgba(0, 0, 0, 0.25),
+		rgba(0, 0, 0, 0.67), rgba(0, 0, 0, 0.25)) center top/70% 1px no-repeat;
+}
+
+#thoughts .entry ul.meta li {
+	margin-top: 1px;
+}
+
+@media ( max-width : 90ch) {
+	#thoughts .entry ul.meta {
+		font-size: 90%;
+		margin-top: 2em;
+	}
+	#thoughts .entry ul.meta li {
+		margin-top: 0.25em;
+	}
+}
+
+#thoughts .editpost {
+	font-size: 1.33em;
+}
+
+#comments>ol {
+	list-style: none;
+	margin: -5em 0 0;
+	padding: 0;
+}
+
+#comments>ol>li {
+	background: linear-gradient(to right, rgba(0, 0, 0, 0.25),
+		rgba(0, 0, 0, 0.67), rgba(0, 0, 0, 0.25)) center bottom/50% 1px
+		no-repeat;
+	padding: 2em 0 1em 0;
+}
+
+#comments ol li.pingback, #comments ol li.trackback {
+	font-style: italic;
+	opacity: 0.5;
+}
+
+#comments ul.meta {
+	position: relative;
+	display: grid;
+	grid-template-columns: auto auto;
+	grid-auto-flow: row dense;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+#comments ul.meta .cai {
+	font-weight: bold;
+}
+
+#comments ul.meta .cdr {
+	grid-column: 2;
+	text-align: right;
+	font-style: italic;
+	opacity: 0.5;
+}
+
+#comments ul.meta .editpost {
+	position: absolute;
+	top: -0.1em;
+	right: 99.5%;
+	margin-right: -1ch;
+	width: 2em;
+	text-align: right;
+	opacity: 0;
+	transition: 123ms;
+}
+
+#comments li:hover ul.meta .editpost {
+	opacity: 1;
+	margin-right: 1ch;
+}
+
+#comments .text p {
+	margin-top: 0.5em;
+}
+
+@media ( max-width : 90ch) {
+	#comments ul.meta {
+		display: block;
+	}
+	#comments ul.meta .cdr {
+		text-align: left;
+	}
+}
+
+#comments #commentform {
+	padding-top: 1em;
+	margin-top: 2em;
+}
+
+#comments #commentform header {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
+}
+
+#comments #commentform header>* {
+	margin: 0;
+}
+
+#comments #commentform header #rss-tb {
+	list-style: none;
+	font-style: italic;
+	opacity: 0.5;
+}
+
+#comments #commentform fieldset {
+	display: grid;
+	grid-gap: 1em 2em;
+	grid-template-columns: max-content 1fr;
+	border: none;
+	padding: 0;
+}
+
+#comments #commentform fieldset section {
+	grid-column: 1/-1;
+}
+
+#comments #commentform #form-info {
+	margin: auto 0 0.5em;
+	line-height: 1.33;
+}
+
+#comments #commentform #fields {
+	margin-top: auto;
+}
+
+#comments #commentform #fields p {
+	margin: 0.5em 0;
+}
+
+#comments #commentform label {
+	display: block;
+	font: bold 1em Source Sans Pro, Open Sans, Helvetica, sans-serif;
+}
+
+#comments #commentform label small {
+	font-size: 90%;
+	font-weight: normal;
+}
+
+#comments #commentform #fields input[type] {
+	width: 40ch;
+	font: 85% Source Sans Pro, Open Sans, Helvetica, sans-serif;
+}
+
+#comments #commentform textarea {
+	width: 100%;
+	font: 90% Source Sans Pro, Open Sans, Helvetica, sans-serif;
+	padding: 0.25ch 0.5ch;
+}
+
+#comments
+
+ 
+
+#commentform
+
+ 
+
+#comment_preview
+
+
+:not
+
+ 
+
+(
+:empty
+
+ 
+
+)
+{
+border
+
+
+:
+
+ 
+
+1
+px
+
+ 
+
+solid
+
+ 
+
+rgba
+
+
+(0
+,
+0,
+0,
+0
+.25
+
+
+);
+padding
+
+
+:
+
+ 
+
+0
+1
+ch
+
+
+;
+}
+#comments #commentform #submit {
+	font-size: 0.95em;
+	fon-weight: bold;
+}
+
+@media ( max-width : 90ch) {
+	#comments #commentform fieldset {
+		display: block;
+	}
+}
+
+#thoughts h1.pagetitle {
+	text-align: center;
+	font-weight: normal;
+	font-style: italic;
+	font-size: 2.5em;
+	line-height: 1.1;
+	margin: 0 0 1.5em;
+	opacity: 0.5;
+}
+
+#thoughts h1.pagetitle em {
+	font-weight: bold;
+	font-style: normal;
+}
+
+@media ( max-width : 90ch) {
+	#thoughts h1.pagetitle {
+		font-size: 1.5em;
+		font-size: calc(0.75em + 5vmin);
+	}
+}

@@ -1,0 +1,14 @@
+.home {
+	position: relative;
+	overflow: hidden;
+	text-align: center;
+	min-height: 440px;
+	margin: auto;
+	max-width: 1250px;
+}
+
+@media screen and (min-width: 950px) {
+	.home {
+		margin-top: 26px;
+	}
+}
