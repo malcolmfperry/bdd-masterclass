@@ -107,3 +107,12 @@
 2018-07-17 06:59:29,077 INFO c.d.e.f.AdoptPetsPFStyle [main] Topsy is adopted! 
 2018-07-17 06:59:29,826 INFO c.d.e.f.AdoptPetsPFStyle [main] The adoption is paid for! 
 2018-07-17 06:59:29,873 INFO c.d.e.f.AdoptPetsPFStyle [main] Received: Thank you for adopting a puppy! 
+2018-09-21 05:28:54,019 INFO c.d.e.w.AdoptionStepsPFStyle [main] Opened website! 
+2018-09-21 05:28:54,031 INFO c.d.e.f.AdoptPetsPFStyle [main] Load data completes! 
+2018-09-21 05:28:54,031 INFO c.d.e.f.AdoptPetsPFStyle [main] Set up completes! 
+2018-09-21 05:28:54,501 INFO c.d.e.w.AdoptionStepsPFStyle [main] next page. 
+2018-09-21 05:28:54,602 INFO c.d.e.w.AdoptionStepsPFStyle [main] Found Topsy 
+2018-09-21 05:28:54,603 INFO c.d.e.f.AdoptPetsPFStyle [main] Topsy is found! 
+2018-09-21 05:28:56,220 INFO c.d.e.f.AdoptPetsPFStyle [main] Topsy is adopted! 
+2018-09-21 05:28:57,051 INFO c.d.e.f.AdoptPetsPFStyle [main] The adoption is paid for! 
+2018-09-21 05:28:57,092 INFO c.d.e.f.AdoptPetsPFStyle [main] Received: Thank you for adopting a puppy! 
