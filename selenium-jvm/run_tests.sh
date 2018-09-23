@@ -4,7 +4,7 @@
 # Required JDK 1.8
 
 export PUPPY_WEBSITE=http://puppies.herokuapp.com
-export WEBDRIVER_CHROME_DRIVER=$HOME/dev/bin/webdrivers/chromedriver-240
+export WEBDRIVER_CHROME_DRIVER=$HOME/dev/bin/drivers/chromedriver
 
 mvn clean
 mvn -Dtest=AdoptPetsPOMStyle -Dlog4j.configurationFile=src/test/resources/log4j2.xml test

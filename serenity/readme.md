@@ -25,4 +25,55 @@ The purpose of this re-implementation is to determine if the new way of writing
 the automated tests assists in reading the report.
 
 I want the report to be as readable to the least technical knowledgeable stakeholder.
- 
+
+## Needed environment variable
+
+```
+PUPPY_WEBSITE=http://puppies.herokuapp.com
+
+or ...
+
+PUPPY_WEBSITE=http://puppies-drtran.7e14.starter-us-west-2.openshiftapps.com/
+>>> Free version of openshift --> SLOWWWWWWWWWW
+```
+
+## Run with local Chrome driver:
+
+```
+-Dwebdriver.driver=chrome
+-Dwebdriver.chrome.driver=/home/kiet/dev/bin/drivers/chromedriver
+-Dcucumber.options="-t @Kiet_WIP"
+```
+
+## Run with Remote Chrome driver:
+
+```
+-Dwebdriver.remote.driver=chrome
+-Dwebdriver.remote.url=http://192.168.1.201:4444/wd/hub
+-Dcucumber.options="-t @Kiet_WIP"
+```
+
+## Generate a Serenity Report:
+
+```
+mvn -DskipTests verify
+```
+
+## Run Selenium Server Docker instance
+
+```
+docker run --name selenium-hub -d -p 4444:4444 -v /dev/shm:/dev/shm selenium/standalone-chrome:3.14
+```
+Debugging with logs:
+
+```
+docker logs -f selenium-hub
+```
+
+## Run Selenium Server Docker Instance on a Red Hat's OpenShift
+
+```
+oc new-app --name selenium-hub selenium/standalone-chrome:3.14
+oc expose selenium-hub
+```
+

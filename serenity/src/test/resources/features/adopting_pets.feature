@@ -4,6 +4,7 @@ Feature: Adopt pets from Puppy Adoption Agency
     I want to adopt one or more pet
     So that I can have some companion when I am home alone
   
+@Kiet_WIP
 Scenario: Adopt pets successfully
 	Given I am at a Pet Adoption Agency to adopt some pets
 	When I adopt these pets: 
