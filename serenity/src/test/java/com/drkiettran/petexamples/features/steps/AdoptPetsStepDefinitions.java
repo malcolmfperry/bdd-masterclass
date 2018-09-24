@@ -69,6 +69,7 @@ public class AdoptPetsStepDefinitions {
 
 	@Given("^I am at a Pet Adoption Agency to adopt some pets$")
 	public void i_am_at_a_Pet_Adoption_Agency_to_adopt_some_pets() throws Exception {
+		logger.info("***: Visiting puppies website!");
 		this.url = getWebsiteUrl();
 		logger.info("***: open web browser @: " + url);
 		adopter.goes_to_url(url);
