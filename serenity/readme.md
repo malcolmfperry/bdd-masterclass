@@ -75,5 +75,7 @@ docker logs -f selenium-hub
 ```
 oc new-app --name selenium-hub selenium/standalone-chrome:3.14
 oc expose selenium-hub
+oc describe route selenium-hub | grep "Requested Host"
+Requested Host:		selenium-hub-myproject.192.168.1.201.nip.io
 ```
 

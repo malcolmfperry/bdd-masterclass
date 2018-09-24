@@ -1,0 +1,16 @@
+FROM maven:3.5.4-jdk-8-slim
+
+RUN useradd -ms /bin/bash maven
+RUN adduser maven root
+RUN apt-get update
+RUN apt-get install -y git
+
+WORKDIR /usr/maven
+
+RUN git clone https://github.com/drtran/bdd-masterclass
+
+RUN cd bdd-masterclass/automation \
+	&& mvn clean install 
+
+RUN cd bdd-masterclass/serenity \
+	&& mvn clean compile 

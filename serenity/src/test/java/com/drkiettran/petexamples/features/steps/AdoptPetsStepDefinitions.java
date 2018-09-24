@@ -75,7 +75,7 @@ public class AdoptPetsStepDefinitions {
 	}
 
 	private String getWebsiteUrl() {
-		return System.getenv("PUPPY_WEBSITE");
+		return System.getProperty("website.url");
 	}
 
 	@Then("^I should be thanked with a message \"([^\"]*)\"$")
