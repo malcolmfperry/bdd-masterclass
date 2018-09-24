@@ -1,18 +1,17 @@
 #!/bin/sh
 
-ls -al 
+rm -Rf bdd-masterclass
 
-cd bdd-masterclass
-git pull https://github.com/drtran/bdd-masterclass
+git clone https://github.com/drtran/bdd-masterclass
 
-cd automation
+cd bdd-masterclass/automation
 mvn clean install
 
 cd ../serenity
 mvn clean
 
 mvn -Dwebdriver.remote.driver=chrome \
-	-Dwebsite.url="http://puppies.herokuapp.com" \
+	-Dwebsite.url=$WEBSITE_URL \
 	-Dwebdriver.remote.url=$SELENIUM_REMOTE_URL \
 	-Dtest=AcceptanceTests \
 	test 
