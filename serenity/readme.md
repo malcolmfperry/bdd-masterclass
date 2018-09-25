@@ -14,7 +14,7 @@ http://puppies.herokuapp.com/
 https://gist.github.com/ziadoz/3e8ab7e944d02fe872c3454d17af31a5
 ```
 
-Well, many folks who are working on the open source software that I am using for 
+Thanks also go to many folks who are working on the open source software that I am using for 
 this project.
 
 ## Introduction
@@ -28,6 +28,10 @@ I want the report to be as readable to the least technical knowledgeable stakeho
 
 ## Needed environment variable
 
+Jeff Morgan's puppies website running on herokuapp.
+
+My puppies website running on 'free' openshift.
+
 ```
 PUPPY_WEBSITE=http://puppies.herokuapp.com
 
@@ -36,6 +40,8 @@ or ...
 PUPPY_WEBSITE=http://puppies-drtran.7e14.starter-us-west-2.openshiftapps.com/
 >>> Free version of openshift --> SLOWWWWWWWWWW
 ```
+
+Replace my IP address (i.e., 192.168.1.201) to your own IP address.
 
 ## Run with local Chrome driver:
 
@@ -120,4 +126,11 @@ oc expose svc acceptance-tests
 
 ```
 
-May need to delete existing acceptance-tests
+May need to delete existing acceptance-tests app before creating a new one. Here are commands:
+
+```
+oc delete route acceptance-tests
+oc delete svc acceptance-tests
+oc delete dc acceptance-tests
+oc delete is acceptance-tests
+```
