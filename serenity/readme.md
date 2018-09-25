@@ -45,6 +45,19 @@ PUPPY_WEBSITE=http://puppies-drtran.7e14.starter-us-west-2.openshiftapps.com/
 -Dcucumber.options="-t @Kiet_WIP"
 ```
 
+
+
+## Run Selenium Server Docker instance
+
+```
+docker run --name selenium-hub -d -p 4444:4444 -v /dev/shm:/dev/shm selenium/standalone-chrome:3.14
+```
+
+Debugging with logs:
+
+```
+docker logs -f selenium-hub
+```
 ## Run with Remote Chrome driver:
 
 ```
@@ -59,23 +72,52 @@ PUPPY_WEBSITE=http://puppies-drtran.7e14.starter-us-west-2.openshiftapps.com/
 mvn -DskipTests verify
 ```
 
-## Run Selenium Server Docker instance
-
-```
-docker run --name selenium-hub -d -p 4444:4444 -v /dev/shm:/dev/shm selenium/standalone-chrome:3.14
-```
-Debugging with logs:
-
-```
-docker logs -f selenium-hub
-```
-
 ## Run Selenium Server Docker Instance on a Red Hat's OpenShift
 
 ```
 oc new-app --name selenium-hub selenium/standalone-chrome:3.14
 oc expose selenium-hub
+
 oc describe route selenium-hub | grep "Requested Host"
+
 Requested Host:		selenium-hub-myproject.192.168.1.201.nip.io
 ```
 
+
+## Build serenity run as a docker image
+
+Two steps involved. 
+
+1. Build base image: 
+
+```
+docker build -t drtran/bdd-masterclass-serenity-base -f Dockerfile_compile .
+
+docker push drtran/bdd-masterclass-serenity-base
+```
+
+2. Build serenity build image: 
+
+```
+docker build --build-arg WEBSITE_URL=http://puppies.herokuapp.com --build-arg SELENIUM_REMOTE_URL=http://selenium-hub-myproject.192.168.1.201.nip.io/wd/hub -t drtran/bdd-masterclass-serenity .
+
+docker push drtran/bdd-masterclass-serenity
+
+```
+
+## Run a build with docker image:
+
+```
+docker run -p 8080:8080 -e WEBSITE_URL=http://puppies.herokuapp.com -e SELENIUM_REMOTE_URL=http://selenium-hub-myproject.192.168.1.201.nip.io/wd/hub -it drtran/bdd-masterclass-serenity
+```
+
+## Run a build as an app on OpenShift
+
+```
+oc new-app --name acceptance-tests -e WEBSITE_URL=http://puppies.herokuapp.com -e SELENIUM_REMOTE_URL=http://selenium-hub-myproject.192.168.1.201.nip.io/wd/hub drtran/bdd-masterclass-serenity
+
+oc expose svc acceptance-tests
+
+```
+
+May need to delete existing acceptance-tests
